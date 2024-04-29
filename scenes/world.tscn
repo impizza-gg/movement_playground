@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://bj33xw5txpl32"]
+
+[ext_resource type="PackedScene" uid="uid://b43tx3at4yaeb" path="res://scenes/world/wall.tscn" id="1_6kpni"]
+[ext_resource type="PackedScene" uid="uid://5huooptdekmv" path="res://scenes/world/ground.tscn" id="2_7ceej"]
+[ext_resource type="PackedScene" uid="uid://ba07fy7bpysac" path="res://scenes/world/box.tscn" id="3_av6kp"]
+[ext_resource type="Material" uid="uid://yus2k2y7kkbj" path="res://assets/materials/standard_material.tres" id="4_gmw3d"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_gxb6x"]
+material = ExtResource("4_gmw3d")
+left_to_right = 0.0
+size = Vector3(2, 1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_nim85"]
+points = PackedVector3Array(-1, 0.5, 0.5, 1, -0.5, 0.5, -1, 0.5, -0.5, -1, -0.5, 0.5, 1, -0.5, -0.5, -1, -0.5, -0.5)
+
+[node name="World" type="Node"]
+
+[node name="Wall" parent="." instance=ExtResource("1_6kpni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 50)
+
+[node name="Wall2" parent="." instance=ExtResource("1_6kpni")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -50)
+
+[node name="Wall3" parent="." instance=ExtResource("1_6kpni")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -50, 1, 0)
+
+[node name="Wall4" parent="." instance=ExtResource("1_6kpni")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 50, 1, 0)
+
+[node name="Ground" parent="." instance=ExtResource("2_7ceej")]
+
+[node name="Box" parent="." instance=ExtResource("3_av6kp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 10)
+
+[node name="Box2" parent="." instance=ExtResource("3_av6kp")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.5, 10)
+
+[node name="Box3" parent="." instance=ExtResource("3_av6kp")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 10, 1, 0)
+
+[node name="Box4" parent="." instance=ExtResource("3_av6kp")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -10, 0.75, 7)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("PrismMesh_gxb6x")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_nim85")
