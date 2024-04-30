@@ -1,9 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://5huooptdekmv"]
 
-[ext_resource type="Material" uid="uid://yus2k2y7kkbj" path="res://assets/materials/standard_material.tres" id="1_gu8ja"]
+[ext_resource type="Material" uid="uid://cp8x0ixm8gw6g" path="res://assets/materials/placeholder.tres" id="1_d5lv1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1t0ji"]
-material = ExtResource("1_gu8ja")
+material = ExtResource("1_d5lv1")
 size = Vector3(100, 0.1, 100)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0tlpk"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4e3pvi0xiqn8"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_sqvgq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ocpyd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wkflo"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4aqv5"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("MeshInstance3D:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_sqvgq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ocpyd")
+
+[node name="Name_Label" type="Label3D" parent="MeshInstance3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.44542, 0)
+text = "
+"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_wkflo")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4aqv5")

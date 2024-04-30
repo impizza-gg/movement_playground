@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2ycoy7gcjn7"]
+
+[ext_resource type="Script" path="res://scripts/AudioManager.gd" id="1_qykfo"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ee6di"]
+mix_rate = 48000.0
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_qykfo")
+
+[node name="Input" type="AudioStreamPlayer" parent="."]
+bus = &"Record"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamGenerator_ee6di")
+autoplay = true

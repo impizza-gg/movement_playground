@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cp8x0ixm8gw6g"]
+
+[ext_resource type="Texture2D" uid="uid://ccuoscf0chga1" path="res://assets/textures/templategrid_albedo.png" id="1_bliox"]
+
+[resource]
+albedo_color = Color(0.34902, 0.32549, 0.305882, 1)
+albedo_texture = ExtResource("1_bliox")
+uv1_scale = Vector3(10, 10, 10)

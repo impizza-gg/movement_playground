@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4e3pvi0xiqn8"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_suouo"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ocpyd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wkflo"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_4aqv5"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_suouo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ocpyd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_wkflo")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_4aqv5")
