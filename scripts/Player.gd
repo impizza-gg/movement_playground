@@ -31,6 +31,7 @@ func _enter_tree() -> void:
 	print(name + " entered the tree: " + ma)
 	$MeshInstance3D/Name_Label.text = name
 	
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
@@ -77,6 +78,7 @@ func _physics_process(delta: float) -> void:
 	camera.transform.origin = _headbob(t_bob)
 	
 	move_and_slide()
+
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

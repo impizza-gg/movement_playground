@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://cv6iemwvxq6mq"]
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://cv6iemwvxq6mq"]
 
 [sub_resource type="AudioEffectDelay" id="AudioEffectDelay_53v0y"]
 resource_name = "Delay"
@@ -6,6 +6,19 @@ dry = 0.2
 tap1_level_db = 0.0
 tap2_level_db = 0.0
 feedback_active = true
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_cybi1"]
+resource_name = "Reverb"
+room_size = 0.5
+spread = 0.7
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_3cfsf"]
+resource_name = "EQ"
+band_db/32_hz = -12.0
+band_db/100_hz = -5.0
+band_db/1000_hz = -5.0
+band_db/3200_hz = -20.0
+band_db/10000_hz = -30.0
 
 [sub_resource type="AudioEffectCapture" id="AudioEffectCapture_seoum"]
 resource_name = "Capture"
@@ -25,5 +38,9 @@ bus/2/volume_db = 0.0
 bus/2/send = &"Mute Bus"
 bus/2/effect/0/effect = SubResource("AudioEffectDelay_53v0y")
 bus/2/effect/0/enabled = false
-bus/2/effect/1/effect = SubResource("AudioEffectCapture_seoum")
-bus/2/effect/1/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectReverb_cybi1")
+bus/2/effect/1/enabled = false
+bus/2/effect/2/effect = SubResource("AudioEffectEQ_3cfsf")
+bus/2/effect/2/enabled = true
+bus/2/effect/3/effect = SubResource("AudioEffectCapture_seoum")
+bus/2/effect/3/enabled = true

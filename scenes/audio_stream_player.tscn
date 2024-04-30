@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch73g4soyrpf3"]
+
+[sub_resource type="AudioStreamGenerator" id="AudioStreamGenerator_ee6di"]
+mix_rate = 48000.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = SubResource("AudioStreamGenerator_ee6di")
+autoplay = true
