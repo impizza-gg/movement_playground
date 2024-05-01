@@ -28,7 +28,7 @@ func _enter_tree() -> void:
 		camera = neck.find_child("Camera3D")
 		
 	var ma = "AUTHORITY" if is_multiplayer_authority() else "NOT AUTHORITY"
-	print(name + " entered the tree: " + ma)
+	#print(name + " entered the tree: " + ma)
 	$MeshInstance3D/Name_Label.text = name
 	
 	

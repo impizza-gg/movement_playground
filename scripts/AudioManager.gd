@@ -28,9 +28,11 @@ func set_multiplayer_id(id: String):
 	multiplayer_id = id
 
 
+@rpc("authority", "call_remote", "reliable")
 func add_buffer(id: String) -> void:
 	print("Adding buffer for player: " + id)
 	receiveBuffers[id] = PackedFloat32Array()
+	print("Dicionary for player: " + multiplayer_id)
 	print(receiveBuffers)
 	
 	var stream_player = stream_player_scene.instantiate()
@@ -114,9 +116,9 @@ func process_incoming() -> void:
 	
 	
 @rpc("any_peer", "call_remote", "unreliable_ordered")
-func sendData(data: PackedFloat32Array, id):
+func sendData(data: PackedFloat32Array, id: String):
 	if receiveBuffers.is_empty():
 		return
-
+	#if receiveBuffers.has(id):
 	receiveBuffers[id].append_array(data)
 		

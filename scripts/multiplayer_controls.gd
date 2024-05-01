@@ -21,7 +21,7 @@ func _on_host_button_pressed() -> void:
 		
 	$IP_Label.text = ip + ":" + port
 	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.server_disconnected.connect(server_disconnected)
 	AudioManager.set_multiplayer_id("1")
@@ -31,28 +31,30 @@ func _on_host_button_pressed() -> void:
 
 func connected_to_server():
 	print("Connected to server")
-	
 	var id := multiplayer.get_unique_id()
-	if id != 1:
-		AudioManager.set_multiplayer_id(str(id))
-		for peer_id in multiplayer.get_peers():
-			AudioManager.add_buffer(str(peer_id))
+	AudioManager.set_multiplayer_id(str(id))
+
+
+func peer_connected(id = 1): 
+	if multiplayer.is_server():
+		rpc_id(id, "add_initial_buffers", multiplayer.get_peers())
+		add_new_player_buffer.rpc(id)
+	add_player(id)
+
 
 func peer_disconnected(id):
+	# TODO: retirar o nodo do jogador do mundo quando ele desconecta.
 	print("Peer disconnected: " + str(id))
 
 
 func server_disconnected():
-	# TODO: retirar o jogador do mundo quando o servidor disconecta
+	# TODO: mandar o jogador para menu principal quando o servidor desconecta
 	print("Server disconnected")
 	
 
 func add_player(id = 1):
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	
-	if id != multiplayer.get_unique_id():
-		AudioManager.add_buffer(str(id))
 	
 	# TODO: Trocar isso por outro método que seja menos dependente da configuração da árvore de nodos
 	var parent = get_parent()
@@ -83,3 +85,18 @@ func _on_paste_button_pressed() -> void:
 		$IP_Input.text = split[0]
 		$JoinPort_Input.text = split[1]
 
+
+@rpc("authority", "call_local", "reliable")
+func add_new_player_buffer(id: int):
+	if id != multiplayer.get_unique_id():
+		AudioManager.add_buffer(str(id))
+
+
+@rpc("authority", "call_remote", "reliable")
+func add_initial_buffers(ids: PackedInt32Array):
+	var own_id := multiplayer.get_unique_id()
+	var host_id := multiplayer.get_remote_sender_id()
+	AudioManager.add_buffer(str(host_id))
+	for id in ids:
+		if id != own_id:
+			AudioManager.add_buffer(str(id))
