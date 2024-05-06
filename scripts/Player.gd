@@ -26,10 +26,11 @@ func _enter_tree() -> void:
 		neck = pivot.instantiate()
 		add_child(neck)
 		camera = neck.find_child("Camera3D")
+		$Name_Label.hide()
 		
-	var ma = "AUTHORITY" if is_multiplayer_authority() else "NOT AUTHORITY"
+	#var ma = "AUTHORITY" if is_multiplayer_authority() else "NOT AUTHORITY"
 	#print(name + " entered the tree: " + ma)
-	$MeshInstance3D/Name_Label.text = name
+	$Name_Label.text = name
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
